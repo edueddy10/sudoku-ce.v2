@@ -1,0 +1,17 @@
+# api/.htaccess
+Options -Indexes
+
+# Sicherstellen, dass PHP-Dateien ausgeführt werden
+AddHandler application/x-httpd-php .php
+
+# JSON Header setzen
+<IfModule mod_headers.c>
+    Header set Content-Type "application/json; charset=utf-8"
+</IfModule>
+
+# Cross-Origin für Entwicklung erlauben
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "GET, POST, OPTIONS"
+    Header set Access-Control-Allow-Headers "Content-Type, Authorization"
+</IfModule>

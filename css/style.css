@@ -1,0 +1,276 @@
+/* File: css/style.css */
+
+:root {
+    --bg-body: #f8f9fa;
+    --board-bg: #ffffff;
+    --border-color: #34495e;
+    --border-light: #dcdcdc;
+    --cell-hover: #e3f2fd;
+    --cell-selected: #bbdefb;
+    --cell-related: #e1f5fe; /* Optionale Hervorhebung für gleiche Zahlen */
+
+    --text-given: #000000; /* Vorgegebene Zahlen: Schwarz/Dunkel */
+    --text-input: #2980b9; /* Benutzereingabe: Blau */
+
+    --color-error: #e74c3c;
+    --color-success: #27ae60;
+
+    --btn-primary: #4a90e2;
+    --btn-danger: #e74c3c;
+}
+
+body {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-body);
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 10px;
+}
+
+/* Header Area */
+header {
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #eee;
+}
+
+.user-info span {
+    font-weight: bold;
+    color: var(--btn-primary);
+}
+
+#logout-btn {
+    padding: 6px 12px;
+    background: transparent;
+    border: 1px solid var(--btn-danger);
+    color: var(--btn-danger);
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+#logout-btn:hover {
+    background: var(--btn-danger);
+    color: white;
+}
+
+/* Main Layout Wrapper */
+.game-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+    width: 100%;
+    max-width: 1000px;
+}
+
+/* Left Column: Game Board */
+.game-area {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.status-bar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.lives { color: var(--color-error); }
+.timer { color: #555; }
+
+/* SUDOKU BOARD */
+#sudoku-board {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    width: 100%;
+    max-width: 500px;
+    aspect-ratio: 1 / 1;
+    background-color: var(--border-color);
+    border: 2px solid var(--border-color);
+    gap: 1px; /* Erzeugt die feinen Linien */
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+.cell {
+    background-color: var(--board-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.1s;
+    position: relative;
+}
+
+/* Responsive Font Size for Cells */
+@media (max-width: 500px) {
+    .cell { font-size: 1.2rem; }
+}
+
+/* Thick Borders for 3x3 Grid */
+.cell:nth-child(3n) {
+    border-right: 2px solid var(--border-color);
+}
+.cell:nth-child(9n) {
+    border-right: none; /* Rechter Rand außen braucht keine Linie */
+}
+.cell:nth-child(n+19):nth-child(-n+27),
+.cell:nth-child(n+46):nth-child(-n+54) {
+    border-bottom: 2px solid var(--border-color);
+}
+
+/* Cell States */
+.cell:hover { background-color: var(--cell-hover); }
+
+.cell.selected {
+    background-color: var(--cell-selected);
+    outline: 2px solid var(--btn-primary);
+    outline-offset: -2px;
+    z-index: 10;
+}
+
+.cell.given {
+    font-weight: 700;
+    color: var(--text-given);
+    background-color: #fafafa;
+}
+
+.cell:not(.given) {
+    color: var(--text-input);
+}
+
+.cell.correct {
+    background-color: #e8f5e9; /* Light Green */
+    color: var(--color-success);
+    font-weight: bold;
+}
+
+.cell.error {
+    background-color: #ffebee; /* Light Red */
+    color: var(--color-error);
+    animation: shake 0.3s;
+}
+
+/* Right Column: Controls & Stats */
+.controls-area {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Difficulty Buttons */
+.difficulty-selector {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.btn-diff {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    background-color: #e0e0e0;
+    color: #555;
+    transition: all 0.2s;
+}
+
+.btn-diff:hover { background-color: #d0d0d0; }
+.btn-diff.active-easy { background-color: #27ae60; color: white; }
+.btn-diff.active-medium { background-color: #f39c12; color: white; }
+.btn-diff.active-hard { background-color: #c0392b; color: white; }
+
+/* Numpad */
+.numpad-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.numpad-btn {
+    padding: 15px;
+    font-size: 1.2rem;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    transition: transform 0.1s, background-color 0.2s;
+}
+
+.numpad-btn:hover { background-color: #f0f0f0; }
+.numpad-btn:active { transform: translateY(2px); }
+
+.numpad-btn.delete { color: var(--color-error); border-color: #fadbd8; }
+.numpad-btn.clear { color: #f39c12; border-color: #fdebd0; }
+
+/* Leaderboard in Game */
+.leaderboard-container {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.leaderboard-container h3 {
+    margin-top: 0;
+    font-size: 1.1rem;
+    border-bottom: 2px solid var(--btn-primary);
+    padding-bottom: 5px;
+    display: inline-block;
+}
+
+/* Animations */
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+/* MOBILE OPTIMIZATION */
+@media (max-width: 800px) {
+    .game-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .game-area {
+        width: 100%;
+        max-width: 450px;
+    }
+
+    #sudoku-board {
+        margin-bottom: 20px;
+    }
+
+    .controls-area {
+        width: 100%;
+        max-width: 450px;
+    }
+
+    .numpad-btn {
+        padding: 20px; /* Bigger touch targets on mobile */
+    }
+}
