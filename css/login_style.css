@@ -1,154 +1,321 @@
 /* File: css/login_style.css */
-
-:root {
-    --primary-color: #4a90e2;
-    --primary-hover: #357abd;
-    --bg-color: #f0f2f5;
-    --card-bg: #ffffff;
-    --text-color: #333333;
-    --text-muted: #666666;
-    --border-radius: 12px;
-    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-}
+/* Complete CSS for Sudoku Login Page */
 
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--bg-color);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
     padding: 20px;
-    color: var(--text-color);
 }
 
-.login-container {
-    background-color: var(--card-bg);
-    padding: 2.5rem;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
+.container {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    padding: 40px;
+    max-width: 900px;
     width: 100%;
-    max-width: 400px;
+    margin: 20px;
+}
+
+header {
     text-align: center;
-    transition: transform 0.3s ease;
+    margin-bottom: 40px;
+    padding-bottom: 25px;
+    border-bottom: 3px solid #667eea;
 }
 
-h1 {
-    margin-bottom: 0.5rem;
-    color: var(--primary-color);
+header h1 {
+    font-size: 3em;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 15px;
+    font-weight: 800;
 }
 
-p {
-    margin-bottom: 1.5rem;
-    color: var(--text-muted);
+header p {
+    color: #666;
+    font-size: 1.2em;
+    line-height: 1.6;
 }
 
-/* Form Styles */
-.form-group {
-    margin-bottom: 1.5rem;
-    text-align: left;
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
 }
 
-label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-    font-size: 0.9rem;
+.login-section, .highscore-section {
+    background: #f8f9fa;
+    padding: 30px;
+    border-radius: 15px;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
 }
 
-input[type="text"] {
-    width: 100%;
-    padding: 12px;
-    border: 2px solid #e1e4e8;
-    border-radius: 8px;
-    font-size: 1rem;
-    transition: border-color 0.2s;
+.login-section h2, .highscore-section h2 {
+    font-size: 1.8em;
+    margin-bottom: 25px;
+    color: #333;
+    text-align: center;
+    font-weight: 600;
 }
 
-input[type="text"]:focus {
+.input-group {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.input-group input {
+    flex: 1;
+    min-width: 250px;
+    padding: 18px 20px;
+    border: 2px solid #ddd;
+    border-radius: 12px;
+    font-size: 1.1em;
+    transition: all 0.3s;
+    background: white;
+}
+
+.input-group input:focus {
     outline: none;
-    border-color: var(--primary-color);
+    border-color: #667eea;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+    transform: translateY(-2px);
 }
 
-.btn-primary {
-    width: 100%;
-    padding: 12px;
-    background-color: var(--primary-color);
+.input-group button {
+    padding: 18px 40px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 600;
+    border-radius: 12px;
+    font-size: 1.1em;
+    font-weight: 700;
     cursor: pointer;
-    transition: background-color 0.2s, transform 0.1s;
+    transition: all 0.3s;
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+    white-space: nowrap;
 }
 
-.btn-primary:hover {
-    background-color: var(--primary-hover);
+.input-group button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.5);
 }
 
-.btn-primary:active {
-    transform: scale(0.98);
+.input-group button:active {
+    transform: translateY(-1px);
 }
 
-/* Messages */
-.message {
-    padding: 10px;
-    border-radius: 6px;
-    margin-bottom: 15px;
-    font-size: 0.9rem;
-    display: none; /* Wird via JS eingeblendet */
+#message {
+    padding: 18px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1em;
+    text-align: center;
+    animation: slideIn 0.4s ease-out;
+    display: none;
 }
 
-.message.error {
-    background-color: #fee2e2;
-    color: #dc2626;
-    border: 1px solid #fecaca;
+#message.success {
+    background: #d4edda;
+    color: #155724;
+    border: 2px solid #28a745;
 }
 
-.message.success {
-    background-color: #dcfce7;
-    color: #16a34a;
-    border: 1px solid #bbf7d0;
+#message.error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 2px solid #f5c6cb;
 }
 
-/* Leaderboard Preview on Login Page */
-#highscore-content {
-    margin-top: 2rem;
-    border-top: 1px solid #eee;
-    padding-top: 1rem;
-}
-
-h2 {
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-}
-
-table {
+.highscore-table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 0.9rem;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+    border: 2px solid #e0e0e0;
 }
 
-th, td {
-    padding: 8px;
+.highscore-table thead {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.highscore-table th {
+    padding: 18px 20px;
     text-align: left;
-    border-bottom: 1px solid #eee;
+    font-weight: 600;
+    font-size: 1em;
+    letter-spacing: 0.5px;
 }
 
-.rank.top-1 { color: #d4af37; font-weight: bold; } /* Gold */
-.rank.top-2 { color: #c0c0c0; font-weight: bold; } /* Silver */
-.rank.top-3 { color: #cd7f32; font-weight: bold; } /* Bronze */
+.highscore-table td {
+    padding: 16px 20px;
+    border-bottom: 1px solid #e0e0e0;
+    color: #555;
+}
 
-/* Responsive Adjustments */
+.highscore-table tbody tr:hover {
+    background: #f8f9fa;
+    transition: background 0.2s;
+}
+
+.highscore-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.rank {
+    font-weight: 700;
+    text-align: center;
+    font-size: 1.1em;
+    width: 80px;
+}
+
+.rank.top-1 {
+    color: #ffd700;
+    font-size: 1.3em;
+}
+
+.rank.top-2 {
+    color: #c0c0c0;
+    font-size: 1.2em;
+}
+
+.rank.top-3 {
+    color: #cd7f32;
+    font-size: 1.15em;
+}
+
+.player-name {
+    font-weight: 500;
+    color: #333;
+}
+
+.score {
+    font-weight: 700;
+    color: #667eea;
+    font-size: 1.1em;
+    text-align: right;
+    width: 120px;
+}
+
+.no-data {
+    text-align: center;
+    padding: 50px 30px;
+    color: #888;
+    font-style: italic;
+    font-size: 1.2em;
+    background: white;
+    border-radius: 12px;
+    border: 2px dashed #ddd;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-25px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .container {
+        padding: 30px;
+    }
+
+    header h1 {
+        font-size: 2.5em;
+    }
+
+    .input-group {
+        flex-direction: column;
+    }
+
+    .input-group input,
+    .input-group button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 25px;
+        margin: 15px;
+    }
+
+    header h1 {
+        font-size: 2.2em;
+    }
+
+    header p {
+        font-size: 1.1em;
+    }
+
+    .login-section, .highscore-section {
+        padding: 25px;
+    }
+
+    .highscore-table {
+        font-size: 0.95em;
+    }
+
+    .highscore-table th,
+    .highscore-table td {
+        padding: 14px 16px;
+    }
+}
+
 @media (max-width: 480px) {
-    .login-container {
-        padding: 1.5rem;
+    .container {
+        padding: 20px;
+        border-radius: 15px;
+    }
+
+    header h1 {
+        font-size: 1.8em;
+    }
+
+    .login-section h2, .highscore-section h2 {
+        font-size: 1.5em;
+    }
+
+    .input-group input {
+        padding: 16px;
+        font-size: 1em;
+    }
+
+    .input-group button {
+        padding: 16px;
+        font-size: 1em;
+    }
+
+    .highscore-table {
+        font-size: 0.85em;
     }
 }
